@@ -7,6 +7,20 @@ analyzes/visualizes its confidence metrics:
 - **pLDDT** — per-residue confidence (0-100)
 - **PAE** — predicted aligned error between residue pairs
 
+## Research question
+
+**Does AlphaFold's per-residue confidence score (pLDDT) track real, experimentally-verified
+protein disorder — and does that relationship hold generally, beyond a single protein?**
+
+- **H1 (single-protein):** within p53, residues in experimentally-characterized disordered
+  regions have significantly lower pLDDT than residues in the folded domains.
+- **H2 (generalization):** across a panel of proteins with independently-verified disorder
+  (from [DisProt](https://disprot.org/)) vs. proteins with no documented disorder, low pLDDT
+  predicts disorder status better than chance.
+
+Both hypotheses are tested against DisProt as an independent ground truth, not just inferred
+from visual inspection of one protein.
+
 ## Contents
 
 - `alphafold_confidence_analysis.ipynb` — main notebook: fetches data via the
