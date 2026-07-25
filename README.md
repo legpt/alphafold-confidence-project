@@ -33,6 +33,9 @@ from visual inspection of one protein.
   for an AP Biology / AP Chemistry reader: asks whether a residue's side-chain
   chemistry explains how confidently AlphaFold models it, using introductory-level
   statistics (confidence intervals, *t*-tests, ANOVA, chi-square, regression).
+  Subject protein is human lysozyme (`P61626`), with p53 as a contrast case.
+  Ten sections, each introducing one statistical tool and closing with a
+  limitations section.
 
 ## Setup
 
@@ -49,3 +52,15 @@ noisy — which is the *correct* signal, not a modeling failure. The PAE heatmap
 shows a block structure: AlphaFold is confident about each domain's internal
 fold but not about how domains are positioned relative to one another, since
 they're joined by flexible linkers.
+
+The chemistry notebook reaches a related conclusion from the other direction.
+Side-chain class does **not** predict pLDDT in lysozyme (ANOVA *p* = 0.136),
+but it strongly predicts **burial** (χ² *p* = 0.0030, odds ratio 3.31) — the
+hydrophobic effect, recovered from downloaded coordinates. The chain stops
+there because every residue in the folded enzyme already scores 95–99: there
+is no variation in pLDDT left to explain. Going from a folded to a disordered
+region moves pLDDT by ~36 points, roughly 95× more than the entire
+hydrophobicity scale does. Section 9 shows that including lysozyme's 18-residue
+signal peptide reverses the sign of the chemistry–confidence correlation
+(*r* = +0.180 → −0.251, both significant) — a worked example of Simpson's
+paradox on real data.
