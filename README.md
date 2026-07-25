@@ -44,18 +44,6 @@ pip install -r requirements.txt
 jupyter notebook alphafold_confidence_analysis.ipynb
 ```
 
-## Findings
-
-p53's folded DNA-binding domain (residues 94-312) scores high and tight on
-pLDDT, while its intrinsically disordered N-/C-terminal regions score low and
-noisy — which is the *correct* signal, not a modeling failure. The PAE heatmap
-shows a block structure: AlphaFold is confident about each domain's internal
-fold but not about how domains are positioned relative to one another, since
-they're joined by flexible linkers.
-
-The chemistry notebook reaches a related conclusion from the other direction —
-see the walkthrough below.
-
 ---
 
 # `amino_acid_chemistry_confidence.ipynb` — a walkthrough
