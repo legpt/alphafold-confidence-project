@@ -3,6 +3,7 @@ numpy
 pandas
 matplotlib
 scipy
+scikit-learn
 requests
 biopython
 py3Dmol

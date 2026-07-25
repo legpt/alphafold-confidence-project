@@ -29,6 +29,10 @@ from visual inspection of one protein.
   - per-residue pLDDT along the sequence with AlphaFold's confidence bands
   - a PAE heatmap
   - the 3D structure colored by pLDDT
+- `amino_acid_chemistry_confidence.ipynb` — a second, self-contained notebook written
+  for an AP Biology / AP Chemistry reader: asks whether a residue's side-chain
+  chemistry explains how confidently AlphaFold models it, using introductory-level
+  statistics (confidence intervals, *t*-tests, ANOVA, chi-square, regression).
 
 ## Setup
 
