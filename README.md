@@ -1,4 +1,4 @@
-# AlphaFold Confidence Score Analysis — Human p53 (TP53)
+# alphafold-confidence-project
 
 Fetches AlphaFold's precomputed prediction for human p53 (UniProt `P04637`) from
 the [AlphaFold Protein Structure Database](https://alphafold.ebi.ac.uk/) and
