@@ -1,8 +1,6 @@
 # alphafold-confidence-project
 
-Fetches AlphaFold's precomputed prediction for human p53 (UniProt `P04637`) from
-the [AlphaFold Protein Structure Database](https://alphafold.ebi.ac.uk/) and
-analyzes/visualizes its confidence metrics:
+The purpose of this project is to understand whether the per-residue confidence score of AlphaFold correlate with it's ability to track protein disorder beyond a single protein.
 
 - **pLDDT** — per-residue confidence (0-100)
 - **PAE** — predicted aligned error between residue pairs
