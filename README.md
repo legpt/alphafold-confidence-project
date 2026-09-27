@@ -21,7 +21,7 @@ To parse and extract data from the database, I used python and python libraries 
 
 ## Summary Statistics
 
-Below are the numerical outputs from our Python analysis, along with plain-English explanations of what the numbers tell us about each enzyme.
+Below are the numerical outputs from my Python analysis, along with explanations of what the numbers tell us about each enzyme.
 
 ### 1. Overall Physical Measurements
 ```text
@@ -35,7 +35,7 @@ PTGS2              604       93.02      15.28         98.00       1.89       -3.
 RIPK1              671       69.74      25.29         80.38      51.03       -0.44      81.97     60.28        79.64     95.70     23.26     4.96
 TNFAIP3            790       73.73      23.49         81.97      41.40       -0.66      77.74     58.35        77.30     93.84     23.42     5.56
 ```
-**What this means:** Enzymes that actively break down tissue or make swelling molecules (like PTGS2, MMP1, and ELANE) are rigid and tightly packed, giving them very high AlphaFold accuracy scores (average pLDDT above 88). In contrast, enzymes that act like volume knobs or switches to turn inflammation on or off (like RIPK1 and TNFAIP3) have looser, floppy sections that touch more fluid, so AlphaFold gives them lower confidence scores (~70–74). Caspase-1 sits right in the middle, with a firm active core but a flexible control switch.
+**What this means:** Enzymes that actively break down tissue or make swelling molecules (like PTGS2, MMP1, and ELANE) are rigid and tightly packed, which gives them very high AlphaFold accuracy scores (average pLDDT above 88). On the other hand, enzymes such as RIPK1 and TNFAIP3 have looser, floppy sections that touch more fluid, so AlphaFold gives them lower confidence scores (~70–74). Caspase-1 sits right in the middle.
 
 ---
 
@@ -51,7 +51,7 @@ PTGS2                        90.7                0.8          3.1             5.
 RIPK1                        32.2               26.5         10.4            30.8
 TNFAIP3                      35.4               30.1         10.1            24.3
 ```
-**What this means:** Think of this like letter grades for how sure the AI is about each protein's shape. Over 75% to 90% of the building blocks in PTGS2, MMP1, and ELANE earned an "A" grade (Very High confidence $\ge 90$). On the other hand, RIPK1 and TNFAIP3 have around 25% to 30% low-confidence regions, which makes sense biologically because those flexible loops need to bend and move to interact with other cell parts.
+**What this means:** Over 75% to 90% of the building blocks in PTGS2, MMP1, and ELANE earned very high confidence ($\geq 90$). On the other hand, RIPK1 and TNFAIP3 have around 25% to 30% low-confidence regions. This makes sense because those flexible loops need to bend and move to interact with other cell parts.
 
 ---
 
@@ -67,7 +67,7 @@ PTGS2                 10.3       13.2           28.0                  48.5
 RIPK1                 13.0       14.2           29.2                  43.7
 TNFAIP3               11.0       16.7           30.0                  42.3
 ```
-**What this means:** About half (42% to 59%) of every enzyme is made of oily, water-fearing (hydrophobic) building blocks that hide on the inside to keep the protein folded. The remaining pieces are charged (positive or negative) or polar, sitting on the outside like magnets to touch watery skin tissue and bind to other molecules.
+**What this means:** About half (42% to 59%) of every enzyme is made of oily, hydrophobic building blocks that hide on the inside to keep the protein folded. The remaining pieces are charged (positive or negative) or polar, sitting on the outside like magnets to touch watery skin tissue and bind to other molecules.
 
 ---
 
@@ -90,7 +90,7 @@ TNFAIP3               11.0       16.7           30.0                  42.3
 In this section, statistical tests were conducted to answer a practical biological question: **Do destructive acne enzymes have a different surface water-attraction (hydropathy) than protective anti-inflammatory enzymes?**
 
 ### 1. Two-Sample Comparison: MMP-1 (Destructive) vs. A20/TNFAIP3 (Protective)
-We compared the surface amino acids of **MMP-1** (which breaks down collagen) against **A20/TNFAIP3** (which halts inflammation):
+I compared the surface amino acids of **MMP-1** (which breaks down collagen) against **A20/TNFAIP3** (which halts inflammation):
 - **Hypothesis**: The null hypothesis ($H_0$) states that both enzymes have the same average surface water-attraction. The alternative hypothesis ($H_a$) states their surface chemical properties differ.
 - **Welch's Two-Sample t-Test**:
   - $t = -1.0267$, $p\text{-value} = 0.3049$
@@ -100,16 +100,16 @@ We compared the surface amino acids of **MMP-1** (which breaks down collagen) ag
   - Mann-Whitney $U = 89,965.5$, $p\text{-value} = 0.4119$
   - Kolmogorov-Smirnov $D = 0.0617$, $p\text{-value} = 0.3997$
 
-**Stakeholder Takeaway:** Because the $p$-value is much greater than $0.05$ and the 95% confidence interval crosses zero, there is **no statistically significant difference** in surface water-attraction between destructive and protective enzymes. Both types of proteins expose similar chemical surface environments to the surrounding skin fluid.
+**Significance:** Because the $p$-value is much greater than $0.05$ and the 95% confidence interval crosses zero, there is **no statistically significant difference** in surface water-attraction between destructive and protective enzymes. Both types of proteins expose similar chemical surface environments to the surrounding skin fluid.
 
 ---
 
 ### 2. Cohort-Wide Test Across All Six Enzymes
-We then tested whether surface water-attraction varies when looking at all six enzymes at the same time:
+I then tested whether surface water-attraction varies when looking at all six enzymes at the same time:
 - **One-Way ANOVA**: $F = 2.3442$, $p\text{-value} = 0.0392$
 - **Kruskal-Wallis Test**: $H = 8.5343$, $p\text{-value} = 0.1291$
 
-**Stakeholder Takeaway:** While parametric ANOVA shows a slight difference driven by specialized binding patches in individual enzymes, the overall non-parametric distribution shows that surface chemistry remains broadly uniform across the acne pathway.
+**Significance:** While parametric ANOVA shows a slight difference driven by specialized binding patches in individual enzymes, the overall non-parametric distribution shows that surface chemistry remains broadly uniform across the acne pathway.
 
 ---
 
@@ -118,14 +118,14 @@ We then tested whether surface water-attraction varies when looking at all six e
 A multiple linear regression model was trained on the target enzyme **Caspase-1** to determine which physical rules dictate whether an amino acid stays buried inside or gets pushed to the watery outer surface (Solvent Accessible Surface Area, or SASA).
 
 ### Model Performance & Key Findings
-- **Explained Variance ($R^2$)**: $0.498$ (adjusted $R^2 = 0.491$, $F = 78.88$, $p = 2.30 \times 10^{-57}$). Roughly **50% of the variation** in surface exposure is explained by basic physical rules.
+- **Explained Variance ($R^2$)**: $0.498$ (adjusted $R^2 = 0.491$, $F = 78.88$, $p = 2.30 \times 10^{-57}$). Roughly **50% of the variation** in surface exposure is explained by basic physical rules. This value is somewhat low, suggesting that other factors not included in the model may also play a role in determining surface exposure.
 - **Standardized Predictor Strengths (Ridge & Lasso Regression)**:
   1. **AlphaFold Confidence (pLDDT: $\beta \approx -23.71$)**: Higher confidence strongly predicts buried, tightly packed residues. Flexible outer loops have lower confidence.
-  2. **Water-Phobia (Hydropathy: $\beta \approx -18.70$)**: Oily, water-fearing amino acids are driven into the protein interior to hide from fluid.
+  2. **Water-Phobia (Hydropathy: $\beta \approx -18.70$)**: Oily, hydrophobic amino acids are driven into the protein interior to hide from fluid.
   3. **Distance from Core (Centroid Distance: $\beta \approx +14.17$)**: Amino acids located farther from the protein's center are naturally exposed on the outside.
   4. **Electrical Charge ($\beta \approx +3.49$)**: Charged residues prefer the exterior where they can interact with water.
 
-**Stakeholder Takeaway:** Protein folding in acne enzymes follows intuitive physics: water-fearing amino acids tuck into the rigid core (high AlphaFold confidence), while charged, flexible loops stay exposed on the surface.
+**Significance:** Protein folding in acne enzymes follows intuitive physics: hydrophobic amino acids tuck into the rigid core (high AlphaFold confidence), while charged, flexible loops stay exposed on the surface.
 
 ---
 
@@ -140,12 +140,28 @@ Using unsupervised machine learning, all 3,205 amino acids across the six enzyme
   - **PC3 (15.8% of variance)**: Reflects AlphaFold prediction uncertainty.
   - **Cumulative Variance**: The top 3 components capture **84.4%** of all structural information.
 
-### 2. Clustering Results (K-Means, GMM, DBSCAN)
+![PCA Projection](images/clustering_pca.png)
+*Figure 5: PCA compresses all structural measurements into a 2D map, showing that amino acids from all six enzymes overlap in the same physical space instead of separating by enzyme.*
+
+### 2. K-Means Clustering
 - **K-Means Clustering ($k = 6$, Silhouette Score = $0.437$)**: Groups amino acids into distinct functional micro-environments (e.g., rigid hydrophobic core, flexible outer loop, active binding cleft).
-- **Gaussian Mixture Models (GMM: $k = 6$, Silhouette Score = $0.361$)**: Confirms six natural probabilistic structural states across the proteins.
+
+![K-Means Clustering](images/clustering_kmeans.png)
+*Figure 6: K-Means divides the amino acids into six distinct zones based on their physical role, cleanly separating buried structural cores from exposed outer surfaces.*
+
+### 3. Gaussian Mixture Models (GMM)
+- **Gaussian Mixture Models (GMM: $k = 6$, Silhouette Score = $0.361$)**: Confirms six natural probabilistic structural states across the proteins, allowing for fuzzy transitions between flexible and rigid zones.
+
+![Gaussian Mixture Models](images/clustering_gmm.png)
+*Figure 7: GMM groups the building blocks by statistical probability, showing how different protein parts smoothly transition between rigid cores and flexible loops.*
+
+### 4. Density-Based Clustering (DBSCAN)
 - **DBSCAN (Density-Based: 36 dense micro-clusters, 350 outliers)**: Identifies tightly packed structural motifs while isolating disordered linker residues.
 
-**Stakeholder Takeaway:** Residues group by their **biophysical job** (such as forming a rigid structural skeleton or an interactive outer surface) rather than which specific enzyme they belong to. All six enzymes share the same modular building blocks.
+![DBSCAN Clustering](images/clustering_dbscan.png)
+*Figure 8: DBSCAN pinpoints 36 dense, tightly packed structural clusters while flagging loose, floppy linker regions as outliers (shown in grey).*
+
+**Significance:** Residues group by their **biophysical job** (such as forming a rigid structural skeleton or an interactive outer surface) rather than which specific enzyme they belong to. All six enzymes share the same modular building blocks.
 
 ---
 
